@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ระบบร้องเรียนอาหาร</title>
+</head>
+<body>
+    <div style="text-align: right; padding: 10px;">
+        <% if (locals.isLoggedIn) { %>
+            <span style="color: green; font-weight: bold;">✅ ยินดีต้อนรับ Admin!</span> 
+            <a href="/logout" style="margin-left: 10px;">[ออกจากระบบ]</a>
+        <% } else { %>
+            <a href="/login">[เข้าสู่ระบบ Admin]</a>
+        <% } %>
+    </div>
+    <h1>รายการร้องเรียนคุณภาพอาหาร</h1>
+    <a href="/stalls">>> ไปดูหน้ารายชื่อร้านอาหาร</a>
+    <br><br>
+    
+    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>วันที่</th>
+                <th>ร้านค้า</th>
+                <th>ปัญหา</th>
+                <th>สถานะ</th>
+                <th>จัดการ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% complaints.forEach(function(c) { %>
+                <tr>
+                    <td><%= c.date %></td>
+                    <td><%= c.stallName %></td>
+                    <td><%= c.type %>: <%= c.detail %></td>
+                    <td style="<%= c.status == 'รอตรวจสอบ' ? 'color:red' : 'color:green' %>">
+                        <%= c.status %>
+                    </td>
+                    <td>
+                        <a href="/complaint/<%= c.id %>">ดูรายละเอียด / ตอบกลับ</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

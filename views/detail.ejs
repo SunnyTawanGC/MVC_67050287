@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>รายละเอียด</title>
+</head>
+<body>
+    <a href="/"> << กลับหน้าหลัก</a>
+    <h2>รายละเอียดข้อร้องเรียน (ID: <%= c.id %>)</h2>
+    
+    <div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px;">
+        <p><strong>ร้าน:</strong> <%= stallName %> (<%= canteenName %>)</p>
+        <p><strong>วันที่ร้องเรียน:</strong> <%= c.date %></p>
+        <p><strong>ประเภทปัญหา:</strong> <%= c.type %></p>
+        <p><strong>รายละเอียด:</strong> <%= c.detail %></p>
+        <p><strong>สถานะ:</strong> 
+           <span style="<%= c.status == 'รอตรวจสอบ' ? 'color:red' : 'color:green' %>">
+               <%= c.status %>
+           </span>
+        </p>
+    </div>
+
+    <h3>ประวัติการตอบกลับ</h3>
+    <ul>
+        <% if (c.responses.length === 0) { %>
+            <li>ยังไม่มีการตอบกลับ</li>
+        <% } %>
+        <% c.responses.forEach(function(r) { %>
+            <li>[<%= r.date %>] เจ้าหน้าที่: <%= r.message %></li>
+        <% }); %>
+    </ul>
+
+    <hr>
+    <h3>เพิ่มการตอบกลับ (Admin Only)</h3>
+    <% if (isLoggedIn) { %>
+        <form action="/respond" method="POST">
+            <input type="hidden" name="complaintId" value="<%= c.id %>">
+            <textarea name="message" rows="4" cols="50" required></textarea><br><br>
+            <button type="submit">บันทึกการตอบกลับ</button>
+        </form>
+    <% } else { %>
+        <p style="color: red;">*** กรุณา <a href="/login">เข้าสู่ระบบ (Login)</a> ก่อนทำการตอบกลับ ***</p>
+    <% } %>
+
+</body>
+</html>

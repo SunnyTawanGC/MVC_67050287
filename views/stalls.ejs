@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>รายชื่อร้านอาหาร</title>
+</head>
+<body>
+    <a href="/"> << กลับหน้าหลัก</a>
+    <h1>รายชื่อร้านอาหารและสถิติการร้องเรียน</h1>
+    
+    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 80%;">
+        <thead>
+            <tr style="background-color: #e0e0e0;">
+                <th>รหัสร้าน</th>
+                <th>ชื่อร้าน</th>
+                <th>โรงอาหาร</th>
+                <th>จำนวนเรื่องร้องเรียน (ครั้ง)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% stalls.forEach(function(s) { %>
+                <tr>
+                    <td><%= s.id %></td>
+                    <td><%= s.name %></td>
+                    <td><%= s.canteenName %></td>
+                    <td style="text-align: center; font-weight: bold; color: <%= s.count > 0 ? 'red' : 'black' %>;">
+                        <%= s.count %>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
