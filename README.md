@@ -1,14 +1,14 @@
-วิธีการรันโปรแกรมครับ
+# วิธีการรันโปรแกรมครับ
 
-เปิด Terminal
+**เปิด Terminal รัน**
 
-npm install  //ติดตั้ง Dependencies
+`npm install`
 
-node app.js  //เริ่มต้นการทำงานของ Server
+`node app.js`
 
 เข้าใช้งานผ่าน Browser: http://localhost:3000
 
-เพื่อเข้าถึงระบบตอบกลับของ Admin
+**เข้าถึงระบบตอบกลับ Admin**
 
-Username: admin
-Password: 1234
+Username: `admin`
+Password: `1234`
